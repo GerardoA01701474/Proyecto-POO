@@ -1,2 +1,3 @@
-# Proyecto-POO
-Proyecto de programación orientada a objetos
+# POO
+Área y perímetro de un triangulo isosceles
+
