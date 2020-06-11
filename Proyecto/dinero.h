@@ -4,7 +4,7 @@
 #include <string>
 
 using namespace std;
-
+/*IMPORTANTE:  esta clase ya no será usada, la dejé aquí para usarla como referencia para algunos métodos de la clase producto.*/
 class Dinero{
   protected:
   float pagoEmpleados;

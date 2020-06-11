@@ -10,11 +10,13 @@ class Grader{
   private:
   int *answer;
   int size;
+  string matricula;
 
   public: 
   Grader();
   Grader(const Grader &b);
   Grader(string ans);
+  Grader(string ma, string ans);
   ~Grader();
   void score(const Grader &b);
   string toString() const;
@@ -41,6 +43,16 @@ Grader::Grader(string ans){
 		j++;
 }
 }
+Grader::Grader(string ma, string ans){
+  matricula = ma;
+  size = ans.size();
+  answer = new int [size];
+  int i, j = 0; 
+	for (i = 0; i < size;  i++) {
+		answer[j] = ans[i] - '0';
+		j++;
+}
+}
 Grader::~Grader() {
 	delete [] answer;
 	answer = 0;
@@ -50,18 +62,22 @@ void Grader::score(const Grader &b){
   int cien = size*2;
   string nota;
   int grade = 0;
-  //grade = new int[size];
   for (int i=0; i<size; i++){
-    if (answer[i] != b.answer[i]){
+    if (b.answer[i] > 0){
+      if (answer[i] != b.answer[i]){
       grade = grade - 1;
     } 
-    else if(answer[i] = b.answer[i]){
+      else if(answer[i] = b.answer[i]){
       grade = grade + 2;
-    }//cout<< grade<<endl;
+    }
+
+    }
+
   }
 
   delete [] answer;
 
+  cout << "matricula: "<<b.matricula<<endl;
   int aux = grade * 100 / cien;
   cout<< "porcentaje: "<<aux<<"%"<<endl;
   if (aux >= 90 && aux <= 100){
@@ -96,7 +112,6 @@ string Grader::toString() const {
 	for (int i = 0; i<size; i++) {
     output << answer[i];
 	}
-  //cout << output.str()<< endl;
 	return output.str();
 }
 

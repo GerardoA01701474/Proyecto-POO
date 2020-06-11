@@ -1,20 +1,21 @@
 #ifndef ALMACEN_H
 #define ALMACEN_H
-#include "espacio.h"
-#include "dinero.h"
+#include "producto.h"
+//#include "dinero.h"
 #include <string>
 
 using namespace std;
 
 
-class Almacen : public Espacio{
+class Almacen : public Producto{
   protected:
   int costalesAbono;
   int cajasAlimento;
+  
 
   public:
   Almacen();
-  Almacen(int c, float l, float a, int ab, int al);
+  Almacen(int cab, int cal, float pab, float pal);
   int get_costalesAbono();
   int get_cajasAlimento();
   void set_costalesAbono(int ab);
@@ -23,14 +24,17 @@ class Almacen : public Espacio{
 };
 
 Almacen::Almacen(){
-  Espacio(7,10,10);
+  //Producto(340,100);
+  precioAbono = 340;
+  precioAlimento = 100;
   costalesAbono = 20;
   cajasAlimento = 20;
+  capacidad = 50;
 }
-Almacen::Almacen(int c, float l, float a, int ab, int al){
-  Espacio(c,l,a);
-  costalesAbono = ab;
-  cajasAlimento = al;
+Almacen::Almacen(int cab, int cal, float pab, float pal){
+  Producto(pab, pal);
+  costalesAbono = cab;
+  cajasAlimento = cal;
 }
 
 int Almacen::get_costalesAbono(){
@@ -46,7 +50,8 @@ void Almacen::set_cajasAlimento(int al){
   cajasAlimento = al;
 }
 void Almacen::reabastecer(){
-  set_inversion(get_inversion()-30*(capacidad-cajasAlimento)                         -25*(capacidad - costalesAbono));
+  float nuevaInversion = get_inversion()-get_precioAlimento()*(capacidad-cajasAlimento) -get_precioAbono()*(capacidad - costalesAbono);
+  set_inversion(nuevaInversion);
   set_costalesAbono(capacidad);
   set_cajasAlimento(capacidad);
   //cajasAlimento = capacidad;
